@@ -21,9 +21,15 @@
 - Git 2.56.0 已就绪（用户目录 AppData/Local/Programs/Git/cmd）
 - 虚拟环境 `.venv` 已创建，依赖已全部安装
 - 环境自检：`.venv/Scripts/python.exe tools/env_check.py`
-- 待办：设置 Git 身份（`git config --global user.name` / `user.email`）
+- Git 身份已设置：FOAMEDHHH
 
-## 首次配置（做一次即可）
+## GitHub 仓库（已连接）
+
+- 仓库地址：https://github.com/FOAMEDHHH/python-30days
+- 本地 `origin` 已绑定，每天 `git push` 即同步
+- 30 天后这就是你的**作品集首页**，HR 会点开看 commit 密度与代码风格
+
+## 首次配置（已完成，仅供复现）
 
 ```
 cd d:/代码库/python-30days
