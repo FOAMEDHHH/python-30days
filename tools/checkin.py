@@ -76,8 +76,10 @@ def label(n):
 
 
 def code_exists(n):
+    if not n:
+        return False
     p = os.path.join(EXERCISES_DIR, "day%02d" % n)
-    if not n or not os.path.isdir(p):
+    if not os.path.isdir(p):
         return False
     for _, _, fs in os.walk(p):
         if any(f.endswith(".py") for f in fs):
@@ -86,8 +88,10 @@ def code_exists(n):
 
 
 def note_exists(n):
+    if not n:
+        return False
     p = os.path.join(NOTES_DIR, "day%02d.md" % n)
-    return bool(n) and os.path.exists(p) and os.path.getsize(p) > 300
+    return os.path.exists(p) and os.path.getsize(p) > 300
 
 
 def bar(minutes):

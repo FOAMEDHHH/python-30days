@@ -1,56 +1,76 @@
-# Python 30 天学习计划（每日 2 小时）
+﻿# Python 30 天学习计划（每日 2 小时）
 
-> 总投入 60 小时 ｜ 起点：零基础 ｜ 目标：AI 应用开发工程师方向
+> 总投入 60 小时 | 起点：零基础 | 目标：AI 应用开发工程师方向
+> Day 1 = 2026-11-04
 
 ## 文件导航
 
 | 文件 | 内容 |
 |---|---|
-| `学习计划.md` | 总目标、30 天总览表、每周验收、三个项目、纪律清单 |
-| `每日任务清单-Day01-15.md` | 前 15 天逐日任务：知识点 / 练习 / 实战产出 / 验收 / 坑 |
-| `每日任务清单-Day16-30.md` | 后 15 天逐日任务 + 项目三落地 + 30 道面试题 + 错误速查 |
-| `requirements.txt` | 全程需要的依赖 |
-| `notes/` | 每天一个学习笔记（用 `notes/笔记模板.md` 起头） |
+| 学习计划.md | 总目标、30 天总览表、每周验收、三个项目、纪律清单 |
+| 每日任务清单-Day01-15.md | 前 15 天逐日任务与验收 |
+| 每日任务清单-Day16-30.md | 后 15 天任务 + 30 道面试题 + 错误速查 |
+| tools/checkin.py | 打卡计时 + 自动生成周报 |
+| solutions/ | 参考实现（Day 01 已提供） |
+| exercises/day01..30/ | 每天的练习目录，骨架已生成 |
+| notes/dayXX.md | 每日笔记（由 笔记模板.md 生成） |
 
-## 快速开始（Day 0）
+## 环境状态
 
-```powershell
+- Python 3.14.8 已安装
+- Git 2.56.0 已安装（用户目录 AppData/Local/Programs/Git/cmd）
+- 待办：创建虚拟环境、安装依赖、设置 Git 身份
+
+## 首次配置（做一次即可）
+
+```
 cd d:/代码库/python-30days
 python -m venv .venv
-.\.venv\Scripts\activate
 pip install -r requirements.txt
+git config --global user.name "你的名字"
+git config --global user.email "你的邮箱"
 ```
 
-## 目录规划（按需手动创建）
+激活虚拟环境：Git Bash 用 `source .venv/Scripts/activate`；
+PowerShell 用 `cd .venv/Scripts` 再执行 `./activate`。
+
+## 打卡工具
 
 ```
-python-30days/
-├── notes/          # 每日笔记 notes/day01.md ...
-├── exercises/      # 每日练习 exercises/day01/main.py ...
-├── projects/
-│   ├── p1_cli_assistant/    # Day 07
-│   ├── p2_data_analysis/    # Day 19
-│   └── p3_rag_chatbot/      # Day 25-29（主打项目）
-├── output/         # 图表输出
-├── .env            # API Key（不要提交 Git）
-├── .venv/
-└── 学习计划.md
+python tools/checkin.py init      # 初始化（已执行，Day 1 = 2026-11-04）
+python tools/checkin.py start     # 开始计时
+python tools/checkin.py stop      # 结束并记录，可加 --note "今日总结"
+python tools/checkin.py status    # 当前状态与今日累计
+python tools/checkin.py show      # 最近 7 天时长
+python tools/checkin.py report    # 生成本周周报 notes/周报-W01.md
 ```
 
-## 每天怎么用
+## 每日流程（2 小时）
 
-1. 打开 `学习计划.md` 找到当天的 Day 编号
-2. 打开对应的 `每日任务清单-*.md`，按「知识点 → 练习 → 实战产出 → 验收」执行
-3. 代码写进 `exercises/dayXX/`，笔记写进 `notes/dayXX.md`
-4. 每天结束：`git add . && git commit -m "dayXX: 完成 XXX"`
+1. `python tools/checkin.py start`
+2. 打开 每日任务清单 找到当天的 Day
+3. 在 `exercises/dayXX/` 写代码（先自己写，卡住超 15 分钟再看 solutions/）
+4. 实战产出 + `notes/dayXX.md` 写笔记
+5. `python tools/checkin.py stop --note "..."`
+6. `git add -A` 然后 `git commit -m "dayXX: 完成 XXX"`
+
+## Git 常用命令
+
+```
+git status
+git add .
+git commit -m "day01: 完成语法基础"
+git log --oneline
+git diff
+```
 
 ## 学习纪律
 
-- 看教程 ≤ 25 分钟，敲代码 ≥ 60 分钟
-- 每天必须 git commit（错代码也提交）
+- 看教程不超过 25 分钟，敲代码不少于 60 分钟
+- 每天必须 commit（错代码也提交）
 - 卡住超 15 分钟就查资料，不死磕
 - 每个知识点当天必须用一次
 
 ## 30 天后
 
-产出：3 个项目（1 个已上线）+ 30 篇笔记 + 技能自评 + 90 天进阶路线图（见 Day 30 任务清单）
+3 个项目（1 个已上线）+ 30 篇笔记 + 技能自评 + 90 天进阶路线（见 Day 30 任务清单）
