@@ -33,3 +33,8 @@ output/
 .vscode/
 .idea/
 .DS_Store
+
+# 日志与临时文件
+*.log
+pip_out*.log
+pip_err*.log

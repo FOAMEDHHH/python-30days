@@ -17,9 +17,11 @@
 
 ## 环境状态
 
-- Python 3.14.8 已安装
-- Git 2.56.0 已安装（用户目录 AppData/Local/Programs/Git/cmd）
-- 待办：创建虚拟环境、安装依赖、设置 Git 身份
+- Python 3.14.8 已就绪
+- Git 2.56.0 已就绪（用户目录 AppData/Local/Programs/Git/cmd）
+- 虚拟环境 `.venv` 已创建，依赖已全部安装
+- 环境自检：`.venv/Scripts/python.exe tools/env_check.py`
+- 待办：设置 Git 身份（`git config --global user.name` / `user.email`）
 
 ## 首次配置（做一次即可）
 
