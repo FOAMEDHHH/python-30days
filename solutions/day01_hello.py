@@ -4,6 +4,21 @@
 自己的版本请写到 exercises/day01/01_hello.py
 """
 
+import sys
+
+
+def _fix_stdout():
+    """输出被重定向到管道时用 UTF-8，避免中文乱码。"""
+    try:
+        enc = (sys.stdout.encoding or "").lower().replace("-", "")
+        if not sys.stdout.isatty() and enc != "utf8":
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+
+_fix_stdout()
+
 WIDTH = 42
 
 

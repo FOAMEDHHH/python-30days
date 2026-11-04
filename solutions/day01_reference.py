@@ -13,6 +13,22 @@ Day 01 参考实现 —— 先自己写，再对照这里
 """
 
 
+import sys
+
+
+def _fix_stdout():
+    """输出被重定向到管道时用 UTF-8，避免中文乱码；真实终端保持原编码。"""
+    try:
+        enc = (sys.stdout.encoding or "").lower().replace("-", "")
+        if not sys.stdout.isatty() and enc != "utf8":
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+
+_fix_stdout()
+
+
 # ---------- 练习 1：打印姓名、城市、目标 ----------
 def ex1_print():
     print("姓名：张三")
@@ -103,15 +119,32 @@ def main():
     print("=" * 50)
     print("Day 01 参考实现")
     print("=" * 50)
-    for fn in (ex1_print, ex2_types, ex3_variables):
+    demos = [
+        ("练习 1：打印姓名、城市、目标", ex1_print),
+        ("练习 2：type() 查看类型", ex2_types),
+        ("练习 3：声明 5 个变量并打印", ex3_variables),
+    ]
+    for title, fn in demos:
         print("\n" + "-" * 50)
-        print(">>> %s" % fn.__doc__.splitlines()[0])
+        print(">>> %s" % title)
         print("-" * 50)
         fn()
     # 练习 4、5 涉及 input()，此处传固定值演示；自己写时请用 input()
+    print("\n" + "-" * 50)
+    print(">>> 练习 4：input() 接收姓名和年龄")
+    print("-" * 50)
     ex4_input("张三", 20)
+    print("\n" + "-" * 50)
+    print(">>> 练习 5：四则运算")
+    print("-" * 50)
     ex5_calc(17, 5)
+    print("\n" + "-" * 50)
+    print(">>> 练习 6：变量交换")
+    print("-" * 50)
     ex6_swap()
+    print("\n" + "-" * 50)
+    print(">>> 练习 7：个人名片")
+    print("-" * 50)
     ex7_card()
 
 

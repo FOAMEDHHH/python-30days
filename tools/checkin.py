@@ -15,7 +15,21 @@ import argparse
 import json
 import os
 import shutil
+import sys
 from datetime import datetime, timedelta
+
+
+def _fix_stdout():
+    """输出被重定向到管道时强制 UTF-8，避免中文乱码；真实终端保持原编码。"""
+    try:
+        enc = (sys.stdout.encoding or "").lower().replace("-", "")
+        if not sys.stdout.isatty() and enc != "utf8":
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+
+_fix_stdout()
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NOTES_DIR = os.path.join(ROOT, "notes")
@@ -53,7 +67,8 @@ def today():
 def day_no(d, date_obj):
     if not d.get("start_date"):
         return None
-    return (date_obj - pdate(d["start_date"])).days + 1
+    n = (date_obj - pdate(d["start_date"])).days + 1
+    return n if n >= 1 else None      # 起始日之前不显示 Day 编号
 
 
 def label(n):
@@ -76,9 +91,10 @@ def note_exists(n):
 
 
 def bar(minutes):
+    """终端进度条（纯 ASCII，避免 GBK 控制台无法输出方块字符）"""
     ratio = min(1.0, minutes / TARGET)
     fill = int(round(ratio * BAR_W))
-    return "[%s%s]%4d%%" % ("█" * fill, "░" * (BAR_W - fill), int(ratio * 100))
+    return "[%s%s]%4d%%" % ("#" * fill, "-" * (BAR_W - fill), int(ratio * 100))
 
 
 def cmd_init(a):
